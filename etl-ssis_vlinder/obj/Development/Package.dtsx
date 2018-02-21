@@ -1,0 +1,1573 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/3/2018 3:33:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LHPA001549"
+  DTS:CreatorName="INBO\frederic_piesschaer"
+  DTS:DTSID="{8B6C7764-D379-46D6-89C7-36B22E7B48B7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2150.2"
+  DTS:LocaleID="2067"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{B944ABBD-C28A-406A-A4C0-679D9F2F1995}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT create visit"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{98B30161-73E0-4D80-8E59-86F8485CCE8D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT create visit"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT create visit\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select L.id, L.name
+from projects_projectlocation PL
+inner join locations_location L on L.ID = PL.location_id
+inner join projects_project P on P.id = PL.project_id
+where P.name like 'Algemene vlinder%'
+order by L.name</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT create visit\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="{D0DCF120-95A4-421A-8078-6C28A6932911}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Meetnetten_uat]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output]"
+                  isSorted="true"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].Columns[id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[id]"
+                      lineageId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].Columns[name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[name]"
+                      length="100"
+                      lineageId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].Columns[name]"
+                      name="name"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="100"
+                      name="name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[id]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[name]"
+                      name="name" />
+                    <outputColumn
+                      refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT create visit\get locationid"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="get locationid"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[TOPO_BES]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TOPO_BES"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[TOPO_BES]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[OriginalWaarnemingID]"
+                      cachedDataType="i4"
+                      cachedName="OriginalWaarnemingID"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[OriginalWaarnemingID]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[created]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[created]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[WRNG_WRNR_ID]"
+                      cachedDataType="i4"
+                      cachedName="WRNG_WRNR_ID"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[WRNG_WRNR_ID]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[protocol_id]"
+                      cachedDataType="i4"
+                      cachedName="protocol_id"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[protocol_id]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[start_date]"
+                      cachedDataType="dbDate"
+                      cachedName="start_date"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[start_date]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[start_time]"
+                      cachedDataType="dbTime2"
+                      cachedName="start_time"
+                      cachedScale="7"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[start_time]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[end_date]"
+                      cachedDataType="dbDate"
+                      cachedName="end_date"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[end_date]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[end_time]"
+                      cachedDataType="dbTime2"
+                      cachedName="end_time"
+                      cachedScale="7"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[end_time]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[Temperatuur]"
+                      cachedDataType="i4"
+                      cachedName="Temperatuur"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Temperatuur]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[Wind]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Wind"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Wind]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[Bewolking]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Bewolking"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bewolking]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[status]"
+                      cachedDataType="i4"
+                      cachedName="status"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[status]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[validation_status]"
+                      cachedDataType="i4"
+                      cachedName="validation_status"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[validation_status]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT create visit\get locationid.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Right Input].Columns[name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="name"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].Columns[name]" />
+                    <inputColumn
+                      refId="Package\DFT create visit\get locationid.Inputs[Merge Join Right Input].Columns[id]"
+                      cachedDataType="i4"
+                      cachedName="id"
+                      lineageId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output].Columns[id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[OriginalWaarnemingID]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[OriginalWaarnemingID]"
+                      name="OriginalWaarnemingID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[OriginalWaarnemingID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[TOPO_BES]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[TOPO_BES]"
+                      name="TOPO_BES"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[TOPO_BES]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[created]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[created]"
+                      name="created">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[created]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[WRNG_WRNR_ID]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[WRNG_WRNR_ID]"
+                      name="WRNG_WRNR_ID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[WRNG_WRNR_ID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[protocol_id]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[protocol_id]"
+                      name="protocol_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[protocol_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[start_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[start_date]"
+                      name="start_date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[start_date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[start_time]"
+                      dataType="dbTime2"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[start_time]"
+                      name="start_time"
+                      scale="7">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[start_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[end_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[end_date]"
+                      name="end_date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[end_date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[end_time]"
+                      dataType="dbTime2"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[end_time]"
+                      name="end_time"
+                      scale="7">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[end_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Temperatuur]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Temperatuur]"
+                      name="Temperatuur">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[Temperatuur]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Wind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Wind]"
+                      name="Wind">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[Wind]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Bewolking]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Bewolking]"
+                      name="Bewolking">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[Bewolking]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[status]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[status]"
+                      name="status">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[status]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[validation_status]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[validation_status]"
+                      name="validation_status">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Left Input].Columns[validation_status]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[location_id]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[location_id]"
+                      name="location_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\DFT create visit\get locationid.Inputs[Merge Join Right Input].Columns[id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT create visit\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select W.WRNG_ID as OriginalWaarnemingID
+	--, WMO.WRMO_ROTE_ID as ROTE_ID
+	, T.TOPO_BES
+	--, W.WRNG_DTE_BGN
+	, case when W.WRNG_USR_CRE_DTE is not null then W.WRNG_USR_CRE_DTE
+	when W.WRNG_USR_UPD_DTE is not null then W.WRNG_USR_UPD_DTE else getdate() end as created
+	, W.WRNG_WRNR_ID
+	--, US.UserName
+	--, 'vlinders transecten (algemene monitoring)' as protocol
+	, 29 as protocol_id
+	, convert(date, W.WRNG_DTE_BGN) as start_date
+	, convert(time, W.WRNG_DTE_BGN) as start_time
+	, convert(date, W.WRNG_DTE_END) as end_date
+	, convert(time, W.WRNG_DTE_END) as end_time
+	, WMO.WRMO_TMP as Temperatuur
+	, case when cast(WMO.WRMO_WND as varchar(255)) is null then 'onbekend' else cast(WMO.WRMO_WND as varchar(255)) end as Wind
+	, case when cast(WMO.WRMO_BWG as varchar(255)) is null then 'onbekend' else cast(WMO.WRMO_BWG as varchar(255)) end as Bewolking
+	, 1 as status --conform protocol
+	--, W.WRNG_WRSA_CDE as validation_status_code_original
+	--, cST.WRSA_DES as validation_status_original
+	, case when W.WRNG_WRSA_CDE = 'NV' then -1 when W.WRNG_WRSA_CDE = 'N' then 10  when W.WRNG_WRSA_CDE = 'V' then 100 else 10 end as validation_status
+	--, W.WRNG_WRNT_CDE
+from tblWaarneming W
+	inner join tblWaarnemingMonitoring WMO on WMO.WRMO_WRNG_ID = W.WRNG_ID
+	inner join tblRoute R on R.ROTE_ID = WMO.WRMO_ROTE_ID
+	inner join tblToponiem T on T.TOPO_ID = R.ROTE_TOPO_ID
+	left outer join tblWaarnemer WR on WR.WRNR_ID = W.WRNG_WRNR_ID
+	left outer join Person P on P.PERS_ID = WR.WRNR_PERS_ID
+	left outer join UserSetting US on US.SettingValue = P.PERS_CDE and us.SettingName = 'pers'
+	inner join cdeWaarnemingStatus cST on cST.WRSA_CDE = W.WRNG_WRSA_CDE
+where W.WRNG_WRNG_ID is null
+order by T.TOPO_BES</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT create visit\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{8C013DA4-B806-4947-A0EE-03B7EDFBEFD7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LHPA001549_SQL2012.Vlinders]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[OriginalWaarnemingID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OriginalWaarnemingID]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[OriginalWaarnemingID]"
+                      name="OriginalWaarnemingID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[TOPO_BES]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TOPO_BES]"
+                      length="50"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[TOPO_BES]"
+                      name="TOPO_BES"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[created]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[created]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[created]"
+                      name="created"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[WRNG_WRNR_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WRNG_WRNR_ID]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[WRNG_WRNR_ID]"
+                      name="WRNG_WRNR_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[protocol_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[protocol_id]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[protocol_id]"
+                      name="protocol_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[start_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[start_date]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[start_date]"
+                      name="start_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[start_time]"
+                      dataType="dbTime2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[start_time]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[start_time]"
+                      name="start_time"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[end_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[end_date]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[end_date]"
+                      name="end_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[end_time]"
+                      dataType="dbTime2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[end_time]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[end_time]"
+                      name="end_time"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Temperatuur]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Temperatuur]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Temperatuur]"
+                      name="Temperatuur"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Wind]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Wind]"
+                      length="255"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Wind]"
+                      name="Wind"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bewolking]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Bewolking]"
+                      length="255"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bewolking]"
+                      name="Bewolking"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[status]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[status]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[status]"
+                      name="status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[validation_status]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[validation_status]"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].Columns[validation_status]"
+                      name="validation_status"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OriginalWaarnemingID]"
+                      dataType="i4"
+                      name="OriginalWaarnemingID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TOPO_BES]"
+                      dataType="wstr"
+                      length="50"
+                      name="TOPO_BES" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[created]"
+                      dataType="dbTimeStamp"
+                      name="created" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WRNG_WRNR_ID]"
+                      dataType="i4"
+                      name="WRNG_WRNR_ID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[protocol_id]"
+                      dataType="i4"
+                      name="protocol_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[start_date]"
+                      dataType="dbDate"
+                      name="start_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[start_time]"
+                      dataType="dbTime2"
+                      name="start_time"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[end_date]"
+                      dataType="dbDate"
+                      name="end_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[end_time]"
+                      dataType="dbTime2"
+                      name="end_time"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Temperatuur]"
+                      dataType="i4"
+                      name="Temperatuur" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Wind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Wind" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Bewolking]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Bewolking" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[status]"
+                      dataType="i4"
+                      name="status" />
+                    <externalMetadataColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[validation_status]"
+                      dataType="i4"
+                      name="validation_status" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OriginalWaarnemingID]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OriginalWaarnemingID]"
+                      name="OriginalWaarnemingID" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TOPO_BES]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TOPO_BES]"
+                      name="TOPO_BES" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[created]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[created]"
+                      name="created" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WRNG_WRNR_ID]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WRNG_WRNR_ID]"
+                      name="WRNG_WRNR_ID" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[protocol_id]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[protocol_id]"
+                      name="protocol_id" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[start_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[start_date]"
+                      name="start_date" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[start_time]"
+                      dataType="dbTime2"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[start_time]"
+                      name="start_time"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[end_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[end_date]"
+                      name="end_date" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[end_time]"
+                      dataType="dbTime2"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[end_time]"
+                      name="end_time"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Temperatuur]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Temperatuur]"
+                      name="Temperatuur" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Wind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Wind]"
+                      name="Wind" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Bewolking]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Bewolking]"
+                      name="Bewolking" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[status]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[status]"
+                      name="status" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[validation_status]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[validation_status]"
+                      name="validation_status" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT create visit\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DFT create visit\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[OriginalWaarnemingID]"
+                      cachedDataType="i4"
+                      cachedName="OriginalWaarnemingID"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[OriginalWaarnemingID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[TOPO_BES]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TOPO_BES"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[TOPO_BES]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[created]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[created]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[WRNG_WRNR_ID]"
+                      cachedDataType="i4"
+                      cachedName="WRNG_WRNR_ID"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[WRNG_WRNR_ID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[protocol_id]"
+                      cachedDataType="i4"
+                      cachedName="protocol_id"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[protocol_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[start_date]"
+                      cachedDataType="dbDate"
+                      cachedName="start_date"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[start_date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[start_time]"
+                      cachedDataType="dbTime2"
+                      cachedName="start_time"
+                      cachedScale="7"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[start_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[end_date]"
+                      cachedDataType="dbDate"
+                      cachedName="end_date"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[end_date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[end_time]"
+                      cachedDataType="dbTime2"
+                      cachedName="end_time"
+                      cachedScale="7"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[end_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[Temperatuur]"
+                      cachedDataType="i4"
+                      cachedName="Temperatuur"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Temperatuur]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[Wind]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Wind"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Wind]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[Bewolking]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Bewolking"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Bewolking]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[status]"
+                      cachedDataType="i4"
+                      cachedName="status"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[status]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[validation_status]"
+                      cachedDataType="i4"
+                      cachedName="validation_status"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[validation_status]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT create visit\Sort.Inputs[Sort Input].Columns[location_id]"
+                      cachedDataType="i4"
+                      cachedName="location_id"
+                      lineageId="Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[location_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT create visit\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[OriginalWaarnemingID]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[OriginalWaarnemingID]"
+                      name="OriginalWaarnemingID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[OriginalWaarnemingID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[TOPO_BES]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[TOPO_BES]"
+                      name="TOPO_BES">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[TOPO_BES]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[created]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[created]"
+                      name="created">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[created]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[WRNG_WRNR_ID]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[WRNG_WRNR_ID]"
+                      name="WRNG_WRNR_ID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[WRNG_WRNR_ID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[protocol_id]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[protocol_id]"
+                      name="protocol_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[protocol_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[start_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[start_date]"
+                      name="start_date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[start_date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[start_time]"
+                      dataType="dbTime2"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[start_time]"
+                      name="start_time"
+                      scale="7">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[start_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[end_date]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[end_date]"
+                      name="end_date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[end_date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[end_time]"
+                      dataType="dbTime2"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[end_time]"
+                      name="end_time"
+                      scale="7">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[end_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[Temperatuur]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[Temperatuur]"
+                      name="Temperatuur">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Temperatuur]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[Wind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[Wind]"
+                      name="Wind">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Wind]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[Bewolking]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[Bewolking]"
+                      name="Bewolking">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[Bewolking]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[status]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[status]"
+                      name="status">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[status]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[validation_status]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[validation_status]"
+                      name="validation_status">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[validation_status]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[location_id]"
+                      dataType="i4"
+                      lineageId="Package\DFT create visit\Sort.Outputs[Sort Output].Columns[location_id]"
+                      name="location_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT create visit\get locationid.Outputs[Merge Join Output].Columns[location_id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT create visit.Paths[ADO NET Source Output]"
+              endId="Package\DFT create visit\get locationid.Inputs[Merge Join Right Input]"
+              name="ADO NET Source Output"
+              startId="Package\DFT create visit\ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\DFT create visit.Paths[Merge Join Output]"
+              endId="Package\DFT create visit\Sort.Inputs[Sort Input]"
+              name="Merge Join Output"
+              startId="Package\DFT create visit\get locationid.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\DFT create visit.Paths[OLE DB Source Output]"
+              endId="Package\DFT create visit\get locationid.Inputs[Merge Join Left Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT create visit\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="154,42"
+          Id="Package\DFT create visit"
+          TopLeft="127,103" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT create visit">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\DFT create visit\OLE DB Source"
+          TopLeft="53,30" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\DFT create visit\ADO NET Source"
+          TopLeft="334,27" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\DFT create visit\get locationid"
+          TopLeft="196,168" />
+        <EdgeLayout
+          Id="Package\DFT create visit.Paths[OLE DB Source Output]"
+          TopLeft="129,72">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="116.333333333333,96"
+              Start="0,0"
+              End="116.333333333333,88.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.967032967033" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52.967032967033"
+                    Point2="0,56.967032967033"
+                    Point3="4,56.967032967033" />
+                  <mssgle:LineSegment
+                    End="112.333333333333,56.967032967033" />
+                  <mssgle:CubicBezierSegment
+                    Point1="112.333333333333,56.967032967033"
+                    Point2="116.333333333333,56.967032967033"
+                    Point3="116.333333333333,60.967032967033" />
+                  <mssgle:LineSegment
+                    End="116.333333333333,88.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT create visit.Paths[ADO NET Source Output]"
+          TopLeft="414,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-123.333333333333,99"
+              Start="0,0"
+              End="-123.333333333333,91.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.7472527472527" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.7472527472527"
+                    Point2="0,58.7472527472527"
+                    Point3="-4,58.7472527472527" />
+                  <mssgle:LineSegment
+                    End="-119.333333333333,58.7472527472527" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-119.333333333333,58.7472527472527"
+                    Point2="-123.333333333333,58.7472527472527"
+                    Point3="-123.333333333333,62.7472527472527" />
+                  <mssgle:LineSegment
+                    End="-123.333333333333,91.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="100,42"
+          Id="Package\DFT create visit\Sort"
+          TopLeft="208,259" />
+        <EdgeLayout
+          Id="Package\DFT create visit.Paths[Merge Join Output]"
+          TopLeft="268,210">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10,49"
+              Start="0,0"
+              End="-10,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="-4,24.5" />
+                  <mssgle:LineSegment
+                    End="-6,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6,24.5"
+                    Point2="-10,24.5"
+                    Point3="-10,28.5" />
+                  <mssgle:LineSegment
+                    End="-10,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT create visit\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT create visit\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
